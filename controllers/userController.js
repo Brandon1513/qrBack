@@ -167,9 +167,9 @@ exports.updateUser = async (req, res) => {
     user.rol = rol || user.rol;
     user.departamento = departamento || user.departamento;
 
-    // Actualizar contraseña solo si se proporciona una nueva
+    // Actualizar contraseña solo si se proporciona una nueva y hashearla
     if (password) {
-      user.password = password; // Asegúrate de tener hash para las contraseñas
+      user.password = await hashPassword(password);
     }
 
     // Guardar los cambios en la base de datos
@@ -182,6 +182,7 @@ exports.updateUser = async (req, res) => {
     res.status(500).json({ message: "Error al actualizar el usuario" });
   }
 };
+
 
 // Eliminar usuario por ID
 exports.deleteUser = async (req, res) => {
