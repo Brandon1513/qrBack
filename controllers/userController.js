@@ -38,10 +38,10 @@ exports.registerUser = async (req, res) => {
     // Generar JWT
     const payload = { id: newUser._id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "8h",
     });
 
-    res.status(201).json({ token, user: newUser }); // Incluir el nuevo usuario en la respuesta
+    res.status(201).json({ token, user: newUser }); 
   } catch (error) {
     console.error(error);
     res.status(500).send("Error del servidor");
