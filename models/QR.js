@@ -13,6 +13,7 @@ const qrSchema = new mongoose.Schema({
   ubicacionAlma: String,
   ubicacionSanita: String,
   ubicacionOfi: String,
+  impreso: {type: Boolean, required: true}
 });
 
 const QRModel = mongoose.model("Activos", qrSchema);
