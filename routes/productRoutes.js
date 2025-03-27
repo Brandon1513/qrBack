@@ -1,11 +1,12 @@
 const express = require("express");
 const { check } = require("express-validator");
-const { registerProduct } = require("../controllers/productController");
+const { registerProduct, getAllProducts } = require("../controllers/productController");
 const auth = require("../middleware/authMiddleware");
 const isAdmin = require("../middleware/isAdmin");
 
 const router = express.Router();
 
+//Ruta para registrar usuarios
 router.post(
   "/register-product",
   auth,
@@ -31,5 +32,9 @@ router.post(
   ],
   registerProduct
 );
+
+//Ruta para obtener los productos
+router.get("/dataProducts", getAllProducts);
+
 
 module.exports = router;

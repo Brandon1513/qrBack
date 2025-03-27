@@ -46,3 +46,12 @@ exports.registerProduct = async (req, res) => {
     res.status(500).json({ message: "Error del servidor", error: error.message });
   }
 };
+
+exports.getAllProducts = async (req, res) => {
+    try{
+        const products = await Product.find();
+        res.json(products);
+    }catch(error) {
+        res.status().json({message: "Error al obtener los productos"});
+    }
+}
