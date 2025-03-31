@@ -1,6 +1,11 @@
 const express = require("express");
 const { check } = require("express-validator");
-const { registerProduct, getAllProducts } = require("../controllers/productController");
+const {
+  registerProduct,
+  getAllProducts,
+  updateProduct,
+  deleteProduct,
+} = require("../controllers/productController");
 const auth = require("../middleware/authMiddleware");
 const isAdmin = require("../middleware/isAdmin");
 
@@ -36,5 +41,10 @@ router.post(
 //Ruta para obtener los productos
 router.get("/dataProducts", getAllProducts);
 
+//Ruta para actualizar los productos
+router.put("/update-product/:id", auth, updateProduct);
+
+//Ruta para eliminar productos
+router.delete("/delete/:id", deleteProduct);
 
 module.exports = router;
