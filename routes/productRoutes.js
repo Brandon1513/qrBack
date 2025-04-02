@@ -5,6 +5,7 @@ const {
   getAllProducts,
   updateProduct,
   deleteProduct,
+  filterProduct
 } = require("../controllers/productController");
 const auth = require("../middleware/authMiddleware");
 const isAdmin = require("../middleware/isAdmin");
@@ -46,5 +47,8 @@ router.put("/update-product/:id", auth, updateProduct);
 
 //Ruta para eliminar productos
 router.delete("/delete/:id", deleteProduct);
+
+//Ruta para filtrar 
+router.get("/filter", filterProduct);
 
 module.exports = router;

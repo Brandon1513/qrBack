@@ -1,6 +1,4 @@
 const Product = require("../models/Product");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 
 exports.registerProduct = async (req, res) => {
@@ -104,19 +102,51 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-exports.deleteProduct = async(req, res) => {
-  const {id} = req.params;
+exports.deleteProduct = async (req, res) => {
+  const { id } = req.params;
 
   try {
     const deletedUser = await Product.findByIdAndDelete(id);
 
-    if(!deletedUser){
-      return res.status(404).json({message: "Usuario no encontrado"});
+    if (!deletedUser) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    res.json({ message: "Usuario eliminado exitosamente"});
+    res.json({ message: "Usuario eliminado exitosamente" });
   } catch (error) {
     console.error("Error al eliminar el usuario: ", error);
-    res.status(500).json({ message: "Error al eliminar el usuario"});
+    res.status(500).json({ message: "Error al eliminar el usuario" });
+  }
+};
+
+exports.filterProduct = async (req, res) => {
+  try {
+    const { categoria, receta, presentacion, idioma } = req.query;
+
+    // Construcción dinámica del filtro
+    const filter = {};
+    if (categoria) filter.categoria = categoria;
+    if (receta) filter.receta = receta;
+    if (presentacion) filter.presentacion = presentacion;
+    if (idioma) filter.idioma = idioma;
+
+    // Si no se envían filtros, traer todos los productos
+    const productos =
+      Object.keys(filter).length > 0
+        ? await Product.find(filter)
+        : await Product.find();
+
+    if (!productos.length) {
+      return res.status(404).json({
+        message: "No se encontraron productos con los filtros seleccionados.",
+      });
+    }
+
+    res.json(productos);
+  } catch (error) {
+    console.error("Error en la búsqueda de productos:", error);
+    res
+      .status(500)
+      .json({ message: "Error interno del servidor al obtener productos." });
   }
 };

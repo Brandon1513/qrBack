@@ -18,4 +18,5 @@ router.put("/update/:id", auth, updateQR);
 //Ruta para actualizar el estado del checkbox
 router.put("/update-checkbox/:id", updateImpreso);
 
+
 module.exports = router;
