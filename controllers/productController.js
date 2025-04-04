@@ -75,32 +75,30 @@ exports.updateProduct = async (req, res) => {
   try {
     const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+      return res.status(404).json({ message: "Producto no encontrado" });
     }
 
-    product.nombre_producto = nombre_producto || product.nombre_producto;
-    product.categoria = categoria || product.categoria;
-    product.receta = receta || product.receta;
-    product.presentacion = presentacion || product.presentacion;
-    product.idioma = idioma || product.idioma;
-    product.url_especificacion =
-      url_especificacion || product.url_especificacion;
-    product.url_etiqueta_gral = url_etiqueta_gral || product.url_etiqueta_gral;
-    product.url_esp_con_impresion =
-      url_esp_con_impresion || product.url_esp_con_impresion;
-    product.url_esp_sin_impresion =
-      url_esp_sin_impresion || product.url_esp_sin_impresion;
-    product.url_sprand = url_sprand || product.url_sprand;
-    product.url_growlink = url_growlink || product.url_growlink;
+    if (nombre_producto !== undefined) product.nombre_producto = nombre_producto;
+    if (categoria !== undefined) product.categoria = categoria;
+    if (receta !== undefined) product.receta = receta;
+    if (presentacion !== undefined) product.presentacion = presentacion;
+    if (idioma !== undefined) product.idioma = idioma;
+    if (url_especificacion !== undefined) product.url_especificacion = url_especificacion;
+    if (url_etiqueta_gral !== undefined) product.url_etiqueta_gral = url_etiqueta_gral;
+    if (url_esp_con_impresion !== undefined) product.url_esp_con_impresion = url_esp_con_impresion;
+    if (url_esp_sin_impresion !== undefined) product.url_esp_sin_impresion = url_esp_sin_impresion;
+    if (url_sprand !== undefined) product.url_sprand = url_sprand;
+    if (url_growlink !== undefined) product.url_growlink = url_growlink;
 
-    const updateProduct = await product.save();
+    const updatedProduct = await product.save();
 
-    res.status(200).json(updateProduct);
+    res.status(200).json(updatedProduct);
   } catch (error) {
-    console.error("Error al actualizar el usuario: ", error);
-    res.status(500).json({ message: "Error al actualizar el usuario" });
+    console.error("Error al actualizar el producto: ", error);
+    res.status(500).json({ message: "Error al actualizar el producto" });
   }
 };
+
 
 exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
