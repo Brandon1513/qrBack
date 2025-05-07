@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema({
   url_esp_sin_impresion: String,
   url_sprand: String,
   url_growlink: String,
+  codigo_barras: String, // ✅ nuevo campo
 });
 
 const ProductModel = mongoose.model("Productos", productSchema);

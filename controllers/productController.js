@@ -19,6 +19,7 @@ exports.registerProduct = async (req, res) => {
     url_esp_sin_impresion,
     url_sprand,
     url_growlink,
+    codigo_barras,
   } = req.body;
 
   try {
@@ -34,6 +35,7 @@ exports.registerProduct = async (req, res) => {
       url_esp_sin_impresion,
       url_sprand,
       url_growlink,
+      codigo_barras,
     });
 
     await newProduct.save();
@@ -70,6 +72,7 @@ exports.updateProduct = async (req, res) => {
     url_esp_sin_impresion,
     url_sprand,
     url_growlink,
+    codigo_barras
   } = req.body;
 
   try {
@@ -92,6 +95,7 @@ exports.updateProduct = async (req, res) => {
       url_esp_sin_impresion || product.url_esp_sin_impresion;
     product.url_sprand = url_sprand || product.url_sprand;
     product.url_growlink = url_growlink || product.url_growlink;
+    product.codigo_barras = codigo_barras || product.codigo_barras; // ✅ nuevo campo
 
     const updateProduct = await product.save();
 
