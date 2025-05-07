@@ -78,7 +78,7 @@ exports.updateProduct = async (req, res) => {
   try {
     const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+      return res.status(404).json({ message: "Producto no encontrado" });
     }
 
     product.nombre_producto = nombre_producto || product.nombre_producto;
@@ -97,14 +97,15 @@ exports.updateProduct = async (req, res) => {
     product.url_growlink = url_growlink || product.url_growlink;
     product.codigo_barras = codigo_barras || product.codigo_barras; // ✅ nuevo campo
 
-    const updateProduct = await product.save();
+    const updatedProduct = await product.save();
 
-    res.status(200).json(updateProduct);
+    res.status(200).json(updatedProduct);
   } catch (error) {
-    console.error("Error al actualizar el usuario: ", error);
-    res.status(500).json({ message: "Error al actualizar el usuario" });
+    console.error("Error al actualizar el producto: ", error);
+    res.status(500).json({ message: "Error al actualizar el producto" });
   }
 };
+
 
 exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
