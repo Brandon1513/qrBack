@@ -12,7 +12,9 @@ const hashPassword = async (password) => {
 // Registrar usuario
 exports.registerUser = async (req, res) => {
   const errors = validationResult(req);
+   console.log("BODY REGISTER USER:", req.body);  // 👈 Agrega esto
   if (!errors.isEmpty()) {
+     console.log("VALIDATION ERRORS:", errors.array());  // 👈 Agrega esto
     return res.status(400).json({ errors: errors.array() });
   }
 
