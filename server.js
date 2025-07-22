@@ -18,7 +18,9 @@ connectDB();
 app.use(cors({
   origin: [
     "http://localhost:5173",              // desarrollo local
-    "https://recetasdasa.domcloud.dev"    // producción
+    "http://localhost:3000",              // desarrollo local logistica
+    "https://recetasdasa.domcloud.dev",    // producción recetasdasa
+    "https://logisticaqr.domcloud.dev/" // producción logística
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
